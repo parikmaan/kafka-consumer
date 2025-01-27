@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: kafka-consumer
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017
+      database: myDB
+  kafka:
+    bootstrap-servers: localhost:29092
+    template:
+      default-topic: employee-events
+    consumer:
+      group-id: group-1
+      auto-offset-reset: earliest
+server:
+  port: 9081
