@@ -6,22 +6,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EmployeeMessageListener {
-    private static long couner = 0;
-    private static final String EMPLOYEE_MESSAGE_TOPIC = "employee-events";
-    private final EmployeeRepository repository;
+  private static long counter = 0;
+  private static final String EMPLOYEE_MESSAGE_TOPIC = "employee-events";
+  private final EmployeeRepository repository;
 
-    @Autowired
-    public EmployeeMessageListener(EmployeeRepository repository) {
-        this.repository = repository;
-    }
+  @Autowired
+  public EmployeeMessageListener(EmployeeRepository repository) {
+    this.repository = repository;
+  }
 
-    @KafkaListener(topics = EMPLOYEE_MESSAGE_TOPIC, groupId = "group-1")
-    public void setEmployeeMessageListener(String message) {
-        this.saveMessage(message);
-    }
+  @KafkaListener(topics = EMPLOYEE_MESSAGE_TOPIC, groupId = "group-1")
+  public void setEmployeeMessageListener(String message) {
+    this.saveMessage(message);
+  }
 
-    private void saveMessage(String message) {
-        this.repository.save(new EmployeeMessage(couner, message)).block();
-        couner++;
-    }
+  private void saveMessage(String message) {
+    this.repository.save(new EmployeeMessage(counter, message)).block();
+    counter++;
+  }
 }
